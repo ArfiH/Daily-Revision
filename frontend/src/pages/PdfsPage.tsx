@@ -27,9 +27,9 @@ export function PdfsPage() {
     loadPdfs();
   }, []);
 
-  const handleCreate = async (input: CreatePdfInput) => {
+  const handleCreate = async (input: CreatePdfInput | UpdatePdfInput) => {
     try {
-      await pdfApi.create(input);
+      await pdfApi.create(input as CreatePdfInput);
       await loadPdfs();
       setShowForm(false);
     } catch (err: any) {
@@ -38,10 +38,10 @@ export function PdfsPage() {
     }
   };
 
-  const handleUpdate = async (input: UpdatePdfInput) => {
+  const handleUpdate = async (input: CreatePdfInput | UpdatePdfInput) => {
     if (!editingPdf) return;
     try {
-      await pdfApi.update(editingPdf.id, input);
+      await pdfApi.update(editingPdf.id, input as UpdatePdfInput);
       await loadPdfs();
       setEditingPdf(null);
     } catch (err: any) {
