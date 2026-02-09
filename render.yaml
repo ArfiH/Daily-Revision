@@ -1,0 +1,33 @@
+# Render Blueprint - Deploy both services at once
+# https://render.com/docs/blueprint-spec
+
+services:
+  # Backend API
+  - type: web
+    name: pdf-revision-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install && npm run build && npm run generate
+    startCommand: npm run migrate:deploy && npm start
+    envVars:
+      - key: DATABASE_URL
+        sync: false  # Set manually or use PostgreSQL addon
+      - key: PORT
+        value: 10000
+      - key: JWT_SECRET
+        generateValue: true  # Auto-generate secure secret
+      - key: CORS_ORIGIN
+        sync: false  # Set to frontend URL after deployment
+      - key: NODE_ENV
+        value: production
+
+  # Frontend Static Site
+  - type: web
+    name: pdf-revision-frontend
+    env: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        sync: false  # Set to backend URL after deployment
