@@ -1,10 +1,3 @@
-export type User = {
-  id: string;
-  email: string;
-  createdAt: string;
-  updatedAt: string;
-};
-
 export type Pdf = {
   id: string;
   title: string;
@@ -51,14 +44,4 @@ export interface UpdatePdfInput {
   targetEndDate?: string;
   priority?: number;
   externalUrl?: string;
-}
-
-export interface LoginInput {
-  email: string;
-  password: string;
-}
-
-export interface LoginResponse {
-  token: string;
-  user: User;
 }
