@@ -7,6 +7,7 @@ import {
 } from '../controllers/pdfController';
 
 const router = Router();
+console.log('PDF routes are working');
 
 router.get('/', listPdfs);
 router.post('/', createPdfHandler);

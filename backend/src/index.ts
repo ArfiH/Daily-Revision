@@ -17,7 +17,6 @@ app.get('/health', (req, res) => {
 });
 
 const PORT = config.port;
-
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
