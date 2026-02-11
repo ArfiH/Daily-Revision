@@ -38,16 +38,13 @@ The API will be available at `http://localhost:3001`
 
 ## API Endpoints
 
-### Auth
-- `POST /auth/login` - Login and get JWT token
-
-### PDFs (requires auth)
+### PDFs ()
 - `GET /api/pdfs` - List all PDFs
 - `POST /api/pdfs` - Create new PDF
 - `PUT /api/pdfs/:id` - Update PDF
 - `DELETE /api/pdfs/:id` - Delete PDF
 
-### Schedule (requires auth)
+### Schedule ()
 - `POST /api/schedule/rebuild` - Rebuild schedule from PDFs
 - `GET /api/schedule/today` - Get today's schedule entries
 - `GET /api/schedule/range?from=YYYY-MM-DD&to=YYYY-MM-DD` - Get schedule for date range

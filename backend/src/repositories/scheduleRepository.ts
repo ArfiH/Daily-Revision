@@ -2,7 +2,6 @@ import prisma from '../config/db';
 import { ScheduleStatus } from '../models/ScheduleEntry';
 
 export interface ScheduleEntryInput {
-  userId: string;
   pdfId: string;
   date: Date;
   fromPage: number;
@@ -15,20 +14,13 @@ export async function createScheduleEntries(entries: ScheduleEntryInput[]) {
   });
 }
 
-export async function deleteScheduleEntriesByUserId(userId: string) {
-  return prisma.scheduleEntry.deleteMany({
-    where: { userId },
-  });
-}
 
 export async function getScheduleEntriesByDateRange(
-  userId: string,
   fromDate: Date,
   toDate: Date
 ) {
   return prisma.scheduleEntry.findMany({
     where: {
-      userId,
       date: {
         gte: fromDate,
         lte: toDate,
@@ -41,7 +33,7 @@ export async function getScheduleEntriesByDateRange(
   });
 }
 
-export async function getTodayScheduleEntries(userId: string) {
+export async function getTodayScheduleEntries() {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const tomorrow = new Date(today);
@@ -49,7 +41,6 @@ export async function getTodayScheduleEntries(userId: string) {
 
   return prisma.scheduleEntry.findMany({
     where: {
-      userId,
       date: {
         gte: today,
         lt: tomorrow,
@@ -62,13 +53,12 @@ export async function getTodayScheduleEntries(userId: string) {
   });
 }
 
-export async function getOverdueScheduleEntries(userId: string) {
+export async function getOverdueScheduleEntries() {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
   return prisma.scheduleEntry.findMany({
     where: {
-      userId,
       date: {
         lt: today,
       },
@@ -83,11 +73,10 @@ export async function getOverdueScheduleEntries(userId: string) {
 
 export async function updateScheduleEntryStatus(
   id: string,
-  userId: string,
   status: ScheduleStatus
 ) {
   return prisma.scheduleEntry.updateMany({
-    where: { id, userId },
+    where: { id },
     data: { status },
   });
 }

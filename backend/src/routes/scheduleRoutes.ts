@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { authMiddleware } from '../middleware/authMiddleware';
 import {
   rebuildScheduleHandler,
   getTodaySchedule,
@@ -8,8 +7,6 @@ import {
 } from '../controllers/scheduleController';
 
 const router = Router();
-
-router.use(authMiddleware);
 
 router.post('/rebuild', rebuildScheduleHandler);
 router.get('/today', getTodaySchedule);
