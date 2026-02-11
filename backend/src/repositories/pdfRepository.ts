@@ -1,7 +1,7 @@
 import prisma from '../config/db';
 import { CreatePdfInput, UpdatePdfInput } from '../models/Pdf';
 
-export async function createPdf(userId: string, input: CreatePdfInput) {
+export async function createPdf( input: CreatePdfInput) {
   const endPage = input.endPage ?? input.totalPages;
   const startPage = input.startPage ?? 1;
   const startDate = input.startDate ?? new Date();
@@ -9,7 +9,6 @@ export async function createPdf(userId: string, input: CreatePdfInput) {
 
   return prisma.pdf.create({
     data: {
-      userId,
       title: input.title,
       totalPages: input.totalPages,
       startPage,
@@ -22,28 +21,27 @@ export async function createPdf(userId: string, input: CreatePdfInput) {
   });
 }
 
-export async function getPdfsByUserId(userId: string) {
+export async function getAllPdfs() {
   return prisma.pdf.findMany({
-    where: { userId },
     orderBy: { createdAt: 'desc' },
   });
 }
 
-export async function getPdfById(id: string, userId: string) {
+export async function getPdfById(id: string,) {
   return prisma.pdf.findFirst({
-    where: { id, userId },
+    where: { id },
   });
 }
 
-export async function updatePdf(id: string, userId: string, input: UpdatePdfInput) {
+export async function updatePdf(id: string, input: UpdatePdfInput) {
   return prisma.pdf.updateMany({
-    where: { id, userId },
+    where: { id },
     data: input,
   });
 }
 
-export async function deletePdf(id: string, userId: string) {
+export async function deletePdf(id: string) {
   return prisma.pdf.deleteMany({
-    where: { id, userId },
+    where: { id },
   });
 }

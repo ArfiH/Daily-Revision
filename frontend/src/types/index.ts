@@ -7,7 +7,6 @@ export type User = {
 
 export type Pdf = {
   id: string;
-  userId: string;
   title: string;
   totalPages: number;
   startPage: number;
@@ -22,7 +21,6 @@ export type Pdf = {
 
 export type ScheduleEntry = {
   id: string;
-  userId: string;
   pdfId: string;
   date: string;
   fromPage: number;

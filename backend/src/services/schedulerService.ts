@@ -1,18 +1,15 @@
 import { Pdf } from '../models/Pdf';
 import {
   createScheduleEntries,
-  deleteScheduleEntriesByUserId,
   ScheduleEntryInput,
 } from '../repositories/scheduleRepository';
 
-export async function rebuildSchedule(userId: string, pdfs: Pdf[]) {
-  // Delete existing schedule entries for this user
-  await deleteScheduleEntriesByUserId(userId);
-
+export async function rebuildSchedule(pdfs: Pdf[]) {
+  
   const entries: ScheduleEntryInput[] = [];
 
   for (const pdf of pdfs) {
-    const pdfEntries = generateScheduleForPdf(userId, pdf);
+    const pdfEntries = generateScheduleForPdf(pdf);
     entries.push(...pdfEntries);
   }
 
@@ -26,7 +23,6 @@ export async function rebuildSchedule(userId: string, pdfs: Pdf[]) {
 }
 
 function generateScheduleForPdf(
-  userId: string,
   pdf: Pdf
 ): ScheduleEntryInput[] {
   const entries: ScheduleEntryInput[] = [];
@@ -52,7 +48,6 @@ function generateScheduleForPdf(
     const toPage = Math.min(currentPage + pagesPerDay - 1, pdf.endPage);
 
     entries.push({
-      userId,
       pdfId: pdf.id,
       date: new Date(currentDate),
       fromPage: currentPage,

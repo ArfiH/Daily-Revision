@@ -100,7 +100,6 @@ The frontend will run on `http://localhost:5173`
 │   ├── src/
 │   │   ├── config/          # Configuration (env, db)
 │   │   ├── controllers/     # Route handlers
-│   │   ├── middleware/       # Auth middleware
 │   │   ├── models/          # Type definitions
 │   │   ├── repositories/    # Database access layer
 │   │   ├── routes/          # API routes
@@ -113,7 +112,7 @@ The frontend will run on `http://localhost:5173`
 │   ├── src/
 │   │   ├── api/             # API client functions
 │   │   ├── components/      # React components
-│   │   ├── context/         # React context (auth)
+│   │   ├── context/         # React context ()
 │   │   ├── pages/           # Page components
 │   │   ├── types/           # TypeScript types
 │   │   ├── App.tsx
@@ -125,11 +124,9 @@ The frontend will run on `http://localhost:5173`
 
 ## API Endpoints
 
-### Auth
-- `POST /auth/login` - Login and get JWT token
 
 ### PDFs
-- `GET /api/pdfs` - List all PDFs for the authenticated user
+- `GET /api/pdfs` - List all PDFs
 - `POST /api/pdfs` - Create a new PDF
 - `PUT /api/pdfs/:id` - Update a PDF
 - `DELETE /api/pdfs/:id` - Delete a PDF
