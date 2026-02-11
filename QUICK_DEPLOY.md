@@ -12,7 +12,8 @@
    - **Root Directory**: `backend`
    - **Environment**: `Node`
    - **Build Command**: `npm install && npm run build && npm run generate`
-   - **Start Command**: `npm run migrate:deploy && npm start`
+   - **Start Command**: `npm run migrate:deploy && npm run seed && npm start`
+   - (Seed runs automatically and only creates the user if they don't exist—no Shell needed.)
 5. Add Environment Variables:
    ```
    DATABASE_URL=file:./prod.db
@@ -21,6 +22,7 @@
    CORS_ORIGIN=https://your-frontend.onrender.com (update after frontend deploy)
    NODE_ENV=production
    ```
+   Optional: `SEED_EMAIL` and `SEED_PASSWORD` to change the default login (default: user@example.com / password123).
 6. Click **"Create Web Service"**
 7. **Copy the backend URL** (e.g., `https://pdf-revision-backend.onrender.com`)
 
@@ -47,16 +49,14 @@
 3. Update `CORS_ORIGIN` to your frontend URL
 4. **Save changes** (will auto-redeploy)
 
-### Step 4: Create Initial User
+### Step 4: Login
 
-1. Go to your backend service → **Shell** tab
-2. Run:
-   ```bash
-   npm run seed
-   ```
-3. Default credentials:
-   - Email: `user@example.com`
-   - Password: `password123`
+The **Start Command** includes `npm run seed`, so the first user is created automatically when the backend starts (no Shell needed). Use on your deployed site:
+
+- **Email**: `user@example.com`
+- **Password**: `password123`
+
+To use different credentials, add env vars `SEED_EMAIL` and `SEED_PASSWORD` in the backend's Environment tab.
 
 ### Done! 🎉
 
