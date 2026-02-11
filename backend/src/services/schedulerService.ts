@@ -1,10 +1,14 @@
 import { Pdf } from '../models/Pdf';
+import prisma from '../config/db';
+
 import {
   createScheduleEntries,
   ScheduleEntryInput,
 } from '../repositories/scheduleRepository';
 
 export async function rebuildSchedule(pdfs: Pdf[]) {
+  // Clear all existing schedule entries first
+  await prisma.scheduleEntry.deleteMany({});
   
   const entries: ScheduleEntryInput[] = [];
 

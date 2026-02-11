@@ -1,16 +1,17 @@
 import { Router } from 'express';
 import {
-  rebuildScheduleHandler,
-  getTodaySchedule,
-  getScheduleRange,
-  updateScheduleStatus,
-} from '../controllers/scheduleController';
+  listPdfs,
+  createPdfHandler,
+  updatePdfHandler,
+  deletePdfHandler,
+} from '../controllers/pdfController';
 
 const router = Router();
+console.log('PDF routes are working');
 
-router.post('/rebuild', rebuildScheduleHandler);
-router.get('/today', getTodaySchedule);
-router.get('/range', getScheduleRange);
-router.patch('/:id', updateScheduleStatus);
+router.get('/', listPdfs);
+router.post('/', createPdfHandler);
+router.put('/:id', updatePdfHandler);
+router.delete('/:id', deletePdfHandler);
 
 export default router;
